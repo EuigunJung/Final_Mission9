@@ -11,14 +11,15 @@ namespace Mission9.Pages
 {
     public class ShopModel : PageModel
     {
-       private IBookRepository repo { get; set; }
+        private IBookRepository repo { get; set; }
 
         public Basket basket { get; set; }
         public string ReturnUrl { get; set; }
 
-        public ShopModel(IBookRepository temp)
+        public ShopModel(IBookRepository temp, Basket b)
         {
             repo = temp;
+            basket = b;
         }
 
 
@@ -26,10 +27,6 @@ namespace Mission9.Pages
         {
             //this enables the user to go back to the main index page
             ReturnUrl = returnUrl ?? "/";
-
-            // when the object key is basket, make sure to get the json data or create an instance of the basket model:
-            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
-
         }
 
 
@@ -37,15 +34,16 @@ namespace Mission9.Pages
         {
             // grab a specific book data matching to the id 
             Book b = repo.Books.FirstOrDefault(x => x.BookID == bookId);
-            
-            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
 
             basket.AddItem(b, 1);
 
-            //set the json file with the added item
-            HttpContext.Session.SetJson("basket", basket);
-
             return RedirectToPage(new { ReturnUrl = returnUrl });
+        }
+
+        public IActionResult OnPostRemove (int bookId, string returnUrl)
+        {
+            basket.RemoveItem(basket.Items.First(x => x.Book.BookID == bookId).Book);
+            return RedirectToPage (new { ReturnUrl = returnUrl });
         }
     }
 }

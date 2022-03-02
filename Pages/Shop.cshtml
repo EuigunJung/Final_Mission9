@@ -3,8 +3,6 @@
 @{
 }
 
-@ViewData["Title"] - Mission 9
-
 <h2>Your Shopping List </h2>
 
 <table class="table table-bordered table-striped">
@@ -24,8 +22,21 @@
             <tr>
                 <td>@i.Book.Title</td>
                 <td>@i.Quantity</td>
-                <td>@i.Book.Price</td>
-                <td>@(i.Quantity * i.Book.Price)</td>
+                <td>@i.Book.Price.ToString("c")</td>
+                @* "ToString("c") displays the $ sign" *@
+                <td>@((i.Quantity * i.Book.Price).ToString("c"))</td>
+
+                <td class="text-center">
+                    @* Form makes sure to pass multiple information when the user clicks the remove button *@
+                    <form method="post" asp-page-handler="Remove">
+                        @* Hides the information in the URL slug *@
+                        <input type="hidden" name="bookId" value="@i.Book.BookID"/>
+                        @* Going back to the Model.ReturnUrl *@
+                        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl"/>
+                        <button type="submit" class="btn btn-sm btn-danger"> Remove </button>
+                    </form>
+                </td>
+
             </tr>
         }
     </tbody>
@@ -33,7 +44,7 @@
     <tfoot>
         <tr>
             <td colspan="3">Total:</td>
-            <td>$@Model.basket.CalculateTotal().ToString("#,##0.00")</td>
+            <td>@Model.basket.CalculateTotal().ToString("c")</td>
         </tr>
     </tfoot>
 
@@ -42,4 +53,6 @@
 @* Adding a link that redirects to continue shopping books *@
 <div>
     <a class="btn btn-primary" href="@Model.ReturnUrl"> Continue Shopping :) </a>
+    <a class="btn btn-primary"> Checkout</a>
 </div>
+

@@ -42,6 +42,10 @@ namespace Mission9
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            //when we see basket, get a new basket method to put the info for a particular session. 
+            services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>() ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
