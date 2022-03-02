@@ -28,7 +28,7 @@
 
                 <td class="text-center">
                     @* Form makes sure to pass multiple information when the user clicks the remove button *@
-                    <form method="post" asp-page-handler="Remove">
+                    <form asp-page-handler="Remove" method="post">
                         @* Hides the information in the URL slug *@
                         <input type="hidden" name="bookId" value="@i.Book.BookID"/>
                         @* Going back to the Model.ReturnUrl *@
@@ -39,7 +39,7 @@
 
             </tr>
         }
-    </tbody>
+    </tbody> 
 
     <tfoot>
         <tr>
@@ -53,6 +53,6 @@
 @* Adding a link that redirects to continue shopping books *@
 <div>
     <a class="btn btn-primary" href="@Model.ReturnUrl"> Continue Shopping :) </a>
-    <a class="btn btn-primary"> Checkout</a>
+    <a class="btn btn-primary" asp-controller="Checkout" asp-action="Purchase">Checkout!</a>
 </div>
 

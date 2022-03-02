@@ -36,7 +36,7 @@ namespace Mission9
             });
 
             services.AddScoped<IBookRepository, EFBookRepository>();
-
+            services.AddScoped<ICheckoutRepository, EFCheckoutRepository>();
             //Enabling Razor Pages
             services.AddRazorPages();
 

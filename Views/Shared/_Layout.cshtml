@@ -3,14 +3,23 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewData["Title"] - Mission 9</title>
+    <title>@ViewData["Title"] Mission 9</title>
     <link href="~/lib/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-
-    <div class="bg-dark text-white p-2">
-        <span class="navbar-brand m-lg-3">Book Store</span>
+    <div class="bg-black text-white p-1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col navbar-brand">Book Store</div>
+                <div class="text-right">
+                     <vc:cart-summary />
+                </div>
+            </div>
+        </div>
     </div>
+
+   
 
     <div class="row m-1 p-1">
 
